@@ -8,7 +8,7 @@ import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key key, this.title = "Todos os Clientes"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -55,6 +55,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         child: Icon(Icons.add),
       ),
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Column(
@@ -121,6 +122,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         RaisedButton(
           color: Colors.blueAccent,
           onPressed: () {
+            Navigator.pop(context);
             Navigator.pushNamed(context, '/update_client', arguments: item)
                 .then((value) => controller.getAllClients());
           },

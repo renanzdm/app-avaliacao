@@ -2,6 +2,7 @@ import 'package:avaliacao_app/app/core/models/client_model.dart';
 import 'package:avaliacao_app/app/modules/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class UpdateClient extends StatefulWidget {
   final ClientModel model;
@@ -15,6 +16,9 @@ class UpdateClient extends StatefulWidget {
 class _UpdateClientState extends State<UpdateClient> {
   final _formKey = GlobalKey<FormState>();
   final HomeController controller = Modular.get<HomeController>();
+  var maskFormatter = new MaskTextInputFormatter(
+      mask: '(##) #########', filter: {"#": RegExp(r'[0-9]')});
+
   @override
   Widget build(BuildContext context) {
     var sizes = MediaQuery.of(context).size;
@@ -68,6 +72,7 @@ class _UpdateClientState extends State<UpdateClient> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextFormField(
+                        inputFormatters: [maskFormatter],
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value.isEmpty) {
